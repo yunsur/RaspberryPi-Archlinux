@@ -22,3 +22,5 @@ The installation archlinuxarm on raspberry pi 2
 ####[8.编译mentohust The compile mentohust](/The compile mentohust)
 
 ####[9.配置zsh和vim The zsh and vim](/The zsh and vim)
+
+####[10.串口控制树莓派(PL2303) The a serial port control](/The a serial port control)
