@@ -1,6 +1,6 @@
 # RaspberryPi-Archlinux安装及相关使用和说明文档
 
-##请安如下顺序阅读:
+##请按如下顺序阅读:
 
 The installation archlinuxarm on raspberry pi 2 
 
