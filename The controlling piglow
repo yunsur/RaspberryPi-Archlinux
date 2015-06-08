@@ -1,4 +1,4 @@
-archlinux 点亮闪灯 piglow
+archlinux 控制 piglow
 
 因为archlinux 默认安装的是python3
 piglow暂时只支持python2
