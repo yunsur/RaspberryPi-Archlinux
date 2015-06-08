@@ -6,8 +6,8 @@ piglow暂时只支持python2
 安装python2 python-smbus python2-raspberry-gpio
 
 pacman -S python2
+pacman -S python2-psutil
 yaourt -S python2-smbus
-yaourt -S python2-psutil
 yaourt -S python2-raspberry-gpio
 
 创建文件夹
