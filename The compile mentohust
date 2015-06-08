@@ -1,0 +1,14 @@
+cd /root/
+wget http://www.tcpdump.org/release/libpcap-1.0.0.tar.gz
+tar zxvf libpcap-1.0.0.tar.gz
+cd libpcap-1.0.0/
+./configure
+make
+
+cd  /root/
+git clone https://github.com/yunsur/mentohust.git
+cd mentohust
+sh autogen.sh
+./configure --disable-encodepass --disable-arp --disable-notify --disable-nls --with-pcap=/root/libpcap-1.0.0/libpcap.a
+make
+make install
