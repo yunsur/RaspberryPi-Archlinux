@@ -1,0 +1,76 @@
+配置hostapd+dnsmasq+iptables实现无线AP热点
+
+注意:hostapd与wpa_supplicant有冲突,所以需要卸载wpa_supplicant,暂时没有找到两全齐美的方法.
+
+pacman -S hostapd dnsmasq iptables
+
+配置DHCP服务器
+vim /etc/dnsmasq.conf
+
+interface=wlan0
+listen-address=172.16.1.1,127.0.0.1
+bind-interfaces
+dhcp-range=172.16.1.1,172.16.1.10,12h
+dhcp-option=3,172.16.1.1
+dhcp-option=6,172.16.1.1
+dhcp-authoritative
+
+配置无线AP热点
+vim /etc/hostapd/hostapd.conf
+
+interface=wlan0
+driver=nl80211
+ssid=Raspberry
+hw_mode=g
+channel=6
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=2
+wpa_passphrase=mypassword
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=CCMP
+rsn_pairwise=CCMP
+
+Linux内核中启动IP转发
+vim /etc/sysctl.d/30-ipforward.conf
+
+net.ipv4.ip_forward=1
+net.ipv6.conf.default.forwarding=1
+net.ipv6.conf.all.forwarding=1
+
+sysctl -p /etc/sysctl.d/30-ipforward.conf
+
+reboot
+
+配置iptables转发规则
+
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+
+iptables-save > /etc/iptables/iptables.rules 	防火墙规则保存到文件中
+iptables-restore < /etc/iptables/iptables.rules	防火墙加载文件中的规则
+
+
+静态IP设置
+vim /etc/systemd/network/wlan0.network
+
+[Match]
+Name=wlan0
+
+[Network]
+Address=172.16.1.1/24
+
+启动服务
+systemctl start dnsmasq	
+systemctl start hostapd	
+systemctl start iptables	
+服务状态
+systemctl status dnsmasq 
+systemctl status hostapd
+systemctl status iptables
+自启服务
+systemctl enable dnsmasq 
+systemctl enable hostapd
+systemctl enable iptables
