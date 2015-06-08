@@ -21,6 +21,10 @@ python2 test.py
 输入10、20、30、40、50、60、1 进行测试
 
 
+demo:
+
+https://github.com/Boeeerb/PiGlow
+
 python模块,你需要导入你的脚本中
 wget https://raw.github.com/Boeeerb/PiGlow/master/piglow.py 
 这将增加和减少所有的发光二极管
