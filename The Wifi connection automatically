@@ -1,0 +1,23 @@
+wpa_actiond 用于自动连接无线网络（Wireless Roaming/autoconnect ）
+ifplugd 用于自动连接以太网（Wired link detection ）。
+wpa_supplicant: 用于无线网络认证
+dialog: 菜单支持
+iw:无线网络配置
+
+
+pacman -S iw dialog ifplugd wpa_supplicant wpa_actiond
+
+cd /etc/netctl
+
+examples 目录下有模板,将模板拷贝到/etc/netctl下
+例如:
+    cp /etc/netctl/examples/wireless-wpa /etc/netctl
+    mv /etc//etc/netctl/wireless-wpa wlan0
+    vim /etc/netctl/wlan0
+
+然后编辑配置文件，修改 ESSID 和 Key 为你的 Wi-Fi 热点 ID 和密码就可以
+复制完成之后记得 chmod 600 禁止非 root 用户访问
+
+systemctl start netctl-auto@wlan0.service
+systemctl status netctl-auto@wlan0.service
+systemctl enable netctl-auto@wlan0.service
