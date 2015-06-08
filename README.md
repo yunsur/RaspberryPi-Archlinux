@@ -1,4 +1,4 @@
-![](https://github.com/yunsur/RaspberryPi-Archlinux/blob/319c38e89df71be08995f7f6a8f166e4bc472954/Raspberry-Archlinux.jpg)
+![](/Raspberry-Archlinux.jpg)
 # RaspberryPi-Archlinux安装及相关使用
 
 ##请按如下顺序阅读:
