@@ -1,0 +1,20 @@
+安装zsh
+pacman -S zsh
+
+安装oh-my-zsh
+wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
+
+更换默认shell
+chsh -s /bin/zsh
+
+更换主题
+ZSH_THEME="rkj-repos" 
+
+增加插件
+(git zsh_reload zsh-syntax-highlighting colored-man rsync autojump)
+
+安装vim
+pacman -S vim
+
+安装spf13配置
+curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.sh
