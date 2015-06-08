@@ -1,0 +1,70 @@
+下载：ArchLinuxARM-rpi-2-latest.tar.gz
+
+首先，需要一个linux环境，archlinuxarm系统的安装需要用linux环境复制文件，把sd卡或tf卡连接到装有linux环境的电脑上。
+
+参照ArchLinuxARM上的教程进行安装
+
+打开终端，并获得超级权限（把下文中的sdX换成sd在系统中实际显示的名称，如 sda sdb ）
+对sd分区（将会清空sd上的所有数据）
+
+fdisk /dev/sdb
+
+然后使用fdisk命令进行分区操作，步骤如下：
+
+输入 o 并回车，这将会删除所有分区
+输入 p 并回车，这将会列出所有分区，此时应该没有任何分区
+输入 n 并回车，创建新分区，引导分区
+输入 p 并回车，新分区为主分区
+输入 1 并回车，分区序号是1
+按键盘回车，默认初始扇区
+输入 +100M 并回车，设置终止扇区
+输入 t 并回车，再输入 c 并回车，设置该分区文件系统格式为Fat32
+输入 n 并回车，创建新分区，根分区
+输入 p 并回车，新分区为主分区
+输入 2 并回车，分区序号是2
+按键盘回车，默认初始扇区
+按键盘回车，默认终止扇区
+输入 w 并回车，写入设置
+
+格式化分区
+
+mkfs.vfat /dev/sdb1
+mkfs.ext4 /dev/sdb2
+
+创建挂载位置，并挂载刚刚的两个分区
+
+mkdir boot root
+mount /dev/sdb1 boot
+mount /dev/sdb2 root
+
+
+分区操作可以使用图形分区软件如gparted，我用的发行版中就自带了，更加直观。
+删除sd上的所有分区，新建一个100M空间的主分区，分区文件系统Fat32，再把剩余的空间创建一个分区，分区文件系统为Ext4，然后格式化保存即可。
+
+单独的系统分区
+
+挂载点	大小	格式
+/boot	  200M	Fat32
+/	      13G	  Ext4
+swap	   1G
+
+
+下载系统文件，并解压，这一步需要用root用户，而不能使用sudo 
+
+wget http://mirrors.tuna.tsinghua.edu.cn/archlinuxarm/os/ArchLinuxARM-rpi-2-latest.tar.gz
+tar -xf ArchLinuxARM-rpi-2-latest.tar.gz -C root
+sync
+
+然后把boot中的文件复制到第一个分区
+mv root/boot/* boot
+
+有linux环境，顺便修改一下软件源吧
+nano root/etc/pacman.d/mirrorlist
+
+Server = http://mirrors.tuna.tsinghua.edu.cn/archlinuxarm/armv7h/$repo
+
+卸载两个分区
+umount boot root
+
+接着，从电脑拔掉SD卡，至此，就可以把sd插到树莓派上了，
+第一次使用需要用有线连接才能连接网络，ssh登陆用户名：root，密码：root
