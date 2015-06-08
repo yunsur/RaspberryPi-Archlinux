@@ -19,3 +19,4 @@ The installation archlinuxarm on raspberry pi 2
 
 ####[7.控制PiGlow The controlling piglow](/The controlling piglow)
 
+####[8.编译mentohust The compile mentohust](/The compile mentohust)
