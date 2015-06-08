@@ -1,0 +1,18 @@
+在没有网络，没用键盘，没有显示器的情况下，控制树莓派
+
+USB转串口工具（PL2303）
+杜邦线（4根）
+
+使用串口控制树莓派（PL2303）
+----------------------
+  VCC      +5V
+  RX       TXD(GPIO15)
+  TX       RXD(GPIO14)
+  GND      Ground
+----------------------
+
+PS:VCC一般不需要
+
+Windows 可以用Putty或SecureCRT
+
+Linux   可以用minicom
