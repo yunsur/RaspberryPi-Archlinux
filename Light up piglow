@@ -1,0 +1,45 @@
+archlinux 点亮闪灯 piglow
+
+因为archlinux 默认安装的是python3
+piglow暂时只支持python2
+
+安装python2 python-smbus python2-raspberry-gpio
+
+pacman -S python2
+yaourt -S python2-smbus
+yaourt -S python2-psutil
+yaourt -S python2-raspberry-gpio
+
+创建文件夹
+mkdir piglow
+cd piglow
+
+wget https://raw.github.com/Boeeerb/PiGlow/master/piglow.py
+wget https://raw.github.com/Boeeerb/PiGlow/master/Examples/test.py
+
+python2 test.py
+输入10、20、30、40、50、60、1 进行测试
+
+
+python模块,你需要导入你的脚本中
+wget https://raw.github.com/Boeeerb/PiGlow/master/piglow.py 
+这将增加和减少所有的发光二极管
+wget https://raw.github.com/Boeeerb/PiGlow/master/Examples/all.py
+循环显示两种方法
+wget https://raw.github.com/Boeeerb/PiGlow/master/Examples/arm.py
+定制的二进制时钟
+wget https://raw.github.com/Boeeerb/PiGlow/master/Examples/clock.py
+显示你当前的CPU使用情况(需要 psutils)
+wget https://raw.github.com/Boeeerb/PiGlow/master/Examples/cpu.py
+循环颜色从中心到结束后回到中心
+wget https://raw.github.com/Boeeerb/PiGlow/master/Examples/cycle.py
+开关使用每个颜色的方法
+wget https://raw.github.com/Boeeerb/PiGlow/master/Examples/cycle2.py
+迅速的递增和递减单个LED
+wget https://raw.github.com/Boeeerb/PiGlow/master/Examples/indiv.py
+在一个循环开关每个单独LED
+wget https://raw.github.com/Boeeerb/PiGlow/master/Examples/indiv2.py
+你选择每个LED的亮度颜色组
+wget https://raw.github.com/Boeeerb/PiGlow/master/Examples/test.py
+万圣节颜色(红、橙、黄)和随机时间和亮度
+wget https://raw.github.com/Boeeerb/PiGlow/master/Examples/halloween.py
