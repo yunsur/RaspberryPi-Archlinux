@@ -1,4 +1,4 @@
-# RaspberryPi-Archlinux安装及相关使用和说明文档
+# RaspberryPi-Archlinux安装及相关使用
 
 ##请按如下顺序阅读:
 
@@ -15,4 +15,6 @@ The installation archlinuxarm on raspberry pi 2
 ####[5.Wifi AP热点 The Wifi Access Point](/The Wifi Access Point)
 
 ####[6.软件自启动 The software Since the launch](/The software Since the launch)
+
+####[7.控制PiGlow The controlling piglow](/The controlling piglow)
 
