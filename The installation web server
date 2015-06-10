@@ -53,14 +53,15 @@ character_set_client        = utf8
 character_set_server        = utf8
 skip-networking
 
+启动服务
 systemctl start nginx
 systemctl start mysqld
 systemctl start php-fpm
-
+服务状态
 systemctl status nginx
 systemctl status mysqld
 systemctl status php-fpm
-
+自启服务
 systemctl enable nginx
 systemctl enable mysqld
 systemctl enable php-fpm
