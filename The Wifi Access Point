@@ -31,15 +31,10 @@ wpa_pairwise=CCMP
 rsn_pairwise=CCMP
 
 Linux内核中启动IP转发
-vim /etc/sysctl.d/30-ipforward.conf
 
-net.ipv4.ip_forward=1
-net.ipv6.conf.default.forwarding=1
-net.ipv6.conf.all.forwarding=1
+echo 1 > /proc/sys/net/ipv4/ip_forward
 
-sysctl -p /etc/sysctl.d/30-ipforward.conf
-
-reboot
+自启动加入/etc/rc.loacl
 
 配置iptables转发规则
 
