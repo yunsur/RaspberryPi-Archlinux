@@ -1,0 +1,66 @@
+安装web服务器( Nginx,MariaDB, PHP )
+
+pacman -S nginx mariadb mariadb-clients php php-fpm php-cgi php-gd php-mcrypt 
+
+配置 nginx
+
+vim /etc/nginx/nginx.conf
+
+root    /usr/share/nginx/html;
+
+charset utf-8; 
+
+ location ~ \.php$ {
+            fastcgi_pass   unix:/run/php-fpm/php-fpm.sock;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include       fastcgi_params;
+        }
+配置 php
+
+vim /etc/php/php.ini
+
+open_basedir = /usr/shar e/nginx/html/:/srv/http/:/home/:/tmp/:/usr/share/pear/:/usr/share/webapps/
+
+extension=curl.so
+extension=gd.so
+extension=gettext.so
+extension=mysql.so
+extension=mysqli.so
+extension=pdo_mysql.so
+
+vim /etc/php/php-fpm.conf
+
+listen = /run/php-fpm/php-fpm.sock
+
+配置 mysql
+mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+设置mysql密码
+mysql_secure_installation
+登录
+mysql -u root -p
+创建新用户 user1 password
+CREATE USER 'user1'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'user1'@'localhost' WITH GRANT OPTION;
+quit
+
+使用UTF-8
+vim /etc/mysql/my.cnf
+[mysqld]
+init_connect                = 'SET collation_connection = utf8_general_ci,NAMES utf8'
+collation_server            = utf8_general_ci
+character_set_client        = utf8
+character_set_server        = utf8
+skip-networking
+
+systemctl start nginx
+systemctl start mysqld
+systemctl start php-fpm
+
+systemctl status nginx
+systemctl status mysqld
+systemctl status php-fpm
+
+systemctl enable nginx
+systemctl enable mysqld
+systemctl enable php-fpm
