@@ -1,7 +1,5 @@
 配置hostapd+dnsmasq+iptables实现无线AP热点
 
-注意:hostapd与wpa_supplicant有冲突,所以需要卸载wpa_supplicant,暂时没有找到两全齐美的方法.
-
 pacman -S hostapd dnsmasq iptables
 
 配置DHCP服务器
